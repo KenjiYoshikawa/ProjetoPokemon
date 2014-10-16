@@ -35,14 +35,17 @@ class Pokemon():
             #ataques
             numero_de_ataques = pokemon_detail.pop()
             lista_ataques = list()
+
+            id_ataque = 0
             for i in range(0, int(numero_de_ataques)):
+                id_ataque += 1
                 nome_ataque = pokemon_detail.pop()
                 tipo_ataque = pokemon_detail.pop()
                 acuracia_ataque = pokemon_detail.pop()
                 poder_ataque = pokemon_detail.pop()
                 pontos_ataque = pokemon_detail.pop()
 
-                ataque = Ataque(nome_ataque, tipo_ataque, acuracia_ataque, poder_ataque, pontos_ataque)
+                ataque = Ataque(id_ataque ,nome_ataque, tipo_ataque, acuracia_ataque, poder_ataque, pontos_ataque)
                 lista_ataques.append(ataque)
 
             self.lista_ataques = lista_ataques
@@ -52,3 +55,12 @@ class Pokemon():
 
         except:
             raise
+
+    def find_ataque(self, id):
+        for ataque in self.lista_ataques:
+            if(ataque.id == id): return ataque
+
+    def print_ataques_pokemon(self):
+        for ataque in self.lista_ataques:
+            ataque.print_ataque()
+        print()

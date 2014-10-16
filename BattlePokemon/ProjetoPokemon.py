@@ -29,8 +29,19 @@ def main():
             print ("Pokemon não encontrado, digite um Pokemon válido")
 
     batalha = Batalha(first_pokemon, second_pokemon)
+    batalha_pokemon = batalha.start_battle()
+
     print ("\nBatalha Pokemon!")
-    print (batalha.start_battle().nome, "inicia a batalha!")
+    print (batalha_pokemon[0].nome, "inicia a batalha!")
+
+    while True:
+        try:
+            batalha_pokemon[0].print_ataques_pokemon()
+
+            id_ataque = input("Digite o número do ataque")
+
+        except:
+            raise
 
 
 if __name__ == "__main__":
