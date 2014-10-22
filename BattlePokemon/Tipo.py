@@ -1,6 +1,7 @@
 __author__ = 'kenji'
 
 from enum import Enum
+from Validacao import Validacao
 
 class Tipo(Enum):
     Normal = 0
@@ -22,6 +23,9 @@ class Tipo(Enum):
     Blank = 16
 
     def get_tipo(nome_tipo):
+
+        nome_tipo = Validacao(nome_tipo, str).validar()
+
         lista_tipo = list(Tipo)
         for tipo in lista_tipo:
             if (tipo.name == nome_tipo):
