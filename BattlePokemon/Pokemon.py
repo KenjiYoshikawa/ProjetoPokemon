@@ -23,16 +23,18 @@ class Pokemon():
     @property
     def tipo2(self): return self.__tipo2
 
-    def __init__(self, pokemon_detail):
+    def __init__(self, poke_file):
         try:
-            pokemon_detail = self.parse_pokemon_file(pokemon_detail)
-
-            self.__nome = Validacao(pokemon_detail.pop(), str).validar()
-            self.__level = Validacao(int(pokemon_detail.pop()), int).validar()
-            self.__atributo = Atributo(pokemon_detail)
-            self.__tipo1 = Tipo.get_tipo(pokemon_detail.pop())
-            self.__tipo2 = Tipo.get_tipo(pokemon_detail.pop())
-            self.__lista_ataques = Ataques_List(pokemon_detail).list
+            print("Nome: ")
+            self.__nome = Validacao(poke_file.readline(), str).validar()
+            print("Level: ")
+            self.__level = Validacao(int(poke_file.readline()), int).validar()
+            self.__atributo = Atributo(poke_file)
+            print("Tipo1: ")
+            self.__tipo1 = Validacao(Tipo.get_tipo(poke_file.readline().strip()), Tipo).validar()
+            print("Tipo2: ")
+            self.__tipo2 = Validacao(Tipo.get_tipo(poke_file.readline().strip()), Tipo).validar()
+            self.__lista_ataques = Ataques_List(poke_file).list
 
         except IndexError:
             print ("Arquivo de configuração do pokemon incorreto")

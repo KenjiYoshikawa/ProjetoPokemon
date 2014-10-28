@@ -17,6 +17,9 @@ class Ataque():
     @property
     def poder(self): return self.__poder
 
+    @property
+    def acuracia(self): return self.__acuracia
+
     def __init__(self, id, nome, tipo, acuracia, poder, pontos):
         self.__id = id
         self.__nome = nome
@@ -42,17 +45,23 @@ class Ataque():
         else: return False
 
 class Ataques_List():
-    def __init__(self, ataques_detail):
-        numero_de_ataques = Validacao(int(ataques_detail.pop()), int).validar()
+    def __init__(self, poke_file):
         self.__lista_ataques = list()
 
+        print("Número de ataques: ")
+        numero_de_ataques = Validacao(int(poke_file.readline()), int).validar()
         id_ataque = 0
-        for i in range(0, int(numero_de_ataques)):
-            nome_ataque = Validacao(ataques_detail.pop(), str).validar()
-            tipo_ataque = Tipo.get_tipo(Validacao(ataques_detail.pop(), str).validar())
-            acuracia_ataque = Validacao(int(ataques_detail.pop()), int).validar()
-            poder_ataque = Validacao(int(ataques_detail.pop()), int).validar()
-            pontos_ataque = Validacao(int(ataques_detail.pop()), int).validar()
+        for i in range(0, numero_de_ataques):
+            print("Nome do ataque: ")
+            nome_ataque = Validacao(poke_file.readline().strip(), str).validar()
+            print("Tipo do ataque: ")
+            tipo_ataque = Tipo.get_tipo(Validacao(poke_file.readline().strip(), str).validar())
+            print("Acurácia do ataque: ")
+            acuracia_ataque = Validacao(int(poke_file.readline()), int).validar()
+            print("Poder do ataque: ")
+            poder_ataque = Validacao(int(poke_file.readline()), int).validar()
+            print("Pontos do ataque: ")
+            pontos_ataque = Validacao(int(poke_file.readline()), int).validar()
 
             self.__lista_ataques.append(Ataque(i+1, nome_ataque, tipo_ataque, acuracia_ataque, poder_ataque, pontos_ataque))
 
